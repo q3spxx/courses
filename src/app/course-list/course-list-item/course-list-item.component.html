@@ -1,22 +1,20 @@
-<li class="list-group-item">
-  <div class="container">
-    <div class="row">
-      <div class="col-10">
-        <div class="row">
-          <h5 class="col-9">{{courseItem.title}}</h5>
-          <p class="col">{{courseItem.duration + " min"}}</p>
-          <p class="col">{{courseItem.creationDate}}</p>
-          <p class="col-12">{{courseItem.description}}</p>
-        </div>
+<li class="list-group-item course_list_item">
+  <div class="row">
+    <div class="col-10">
+      <div class="row">
+        <h5 class="col-9">{{courseItem.title}}</h5>
+        <p class="col">{{courseItem.duration + " min"}}</p>
+        <p class="col">{{courseItem.creationDate}}</p>
+        <p class="col-12">{{courseItem.description}}</p>
       </div>
-      <div class="col-2 actions align-items-center">
-        <div class="row">
-          <div class="col-12">
-            <button type="button" class="btn btn-success btn-block">Edit</button>
-          </div>
-          <div class="col-12">
-            <button type="button" class="btn btn-danger btn-block">Delete</button>
-          </div>
+    </div>
+    <div class="col-2 actions align-items-center">
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-success btn-block">Edit</button>
+        </div>
+        <div class="col-12">
+          <button type="button" class="btn btn-danger btn-block">Delete</button>
         </div>
       </div>
     </div>
