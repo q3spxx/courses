@@ -15,5 +15,11 @@ export class CourseListComponent implements OnInit {
   ngOnInit() {
     this.courseListItems = this.courseListService.getCourseList();
   }
+  delete(id: number): void {
+    console.log(id);
+  }
+  onClickLoadMore(): void {
+    console.log('Load more');
+  }
 
 }

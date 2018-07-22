@@ -1,11 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HeaderModule } from './header/header.module';
-import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
-import { ToolboxModule } from './toolbox/toolbox.module';
-import { FooterModule } from './footer/footer.module';
-import { CourseListModule } from './course-list/course-list.module';
+import { CoursesPageModule } from './courses-page/courses-page.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -14,11 +10,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HeaderModule,
-    BreadcrumbsModule,
-    ToolboxModule,
-    CourseListModule,
-    FooterModule
+    CoursesPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
