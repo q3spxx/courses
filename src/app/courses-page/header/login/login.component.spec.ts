@@ -4,22 +4,13 @@ import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new LoginComponent();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should show you are logged in', () => {
+    component.login();
+    expect(component.message).toBe('you are logged in');
   });
 });
