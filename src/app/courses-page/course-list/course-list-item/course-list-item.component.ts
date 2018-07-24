@@ -10,7 +10,7 @@ import { CourseListItem } from '../course-list-item';
 export class CourseListItemComponent implements OnInit {
   constructor() { }
   @Input() public courseItem: CourseListItem;
-  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
   ngOnInit() {
   }
 

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestHostComponent, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CourseListItemComponent } from './course-list-item.component';
-import { CourseListItem } from '../course-list-item.model';
+import { CourseListItem } from '../course-list-item';
 
 @Component({
   template: `
@@ -12,17 +12,17 @@ import { CourseListItem } from '../course-list-item.model';
 
 class TestHostComponent {
   public courseItem: CourseListItem = {
-    id: 1,
+    id: '1',
     title: 'Video course 1',
     duration: 88,
-    creationDate: '08-24-2018',
+    creationDate: new Date('05 23 2018'),
     description: 'lorem'
   };
 }
 
 describe('CourseListItemComponent', () => {
   let testHost: TestHostComponent;
-  let fixture: ComponentFixture<CourseListItemComponent>;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
