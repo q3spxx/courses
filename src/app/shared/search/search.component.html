@@ -1,6 +1,6 @@
 <div class="input-group">
-  <input type="text" class="form-control" placeholder="Name, fragment or date...">
+  <input [(ngModel)]="inputValue" type="text" class="form-control" placeholder="Text to search">
   <span class="input-group-btn">
-    <button class="btn btn-secondary" type="button">Search</button>
+    <button (click)="logValue()" class="btn btn-secondary" type="button">Search</button>
   </span>
 </div>
