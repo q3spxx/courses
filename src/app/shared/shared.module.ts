@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [BreadcrumbsComponent],
-  exports: [BreadcrumbsComponent]
+  declarations: [BreadcrumbsComponent, SearchComponent],
+  exports: [BreadcrumbsComponent, SearchComponent]
 })
-export class BreadcrumbsModule { }
+export class SharedModule { }

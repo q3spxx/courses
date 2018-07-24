@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HeaderModule } from './header/header.module';
-import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { ToolboxModule } from './toolbox/toolbox.module';
-import { FooterModule } from './footer/footer.module';
 import { CourseListModule } from './course-list/course-list.module';
 import { AppComponent } from './app.component';
 
@@ -14,11 +13,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HeaderModule,
-    BreadcrumbsModule,
     ToolboxModule,
     CourseListModule,
-    FooterModule
+    CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
