@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CourseListItem } from '../course-list-item.model';
+import { CourseListItem } from '../course-list-item';
 
 @Component({
   selector: 'app-course-list-item',
@@ -9,7 +9,7 @@ import { CourseListItem } from '../course-list-item.model';
 
 export class CourseListItemComponent implements OnInit {
   constructor() { }
-  @Input() private courseItem: CourseListItem;
+  @Input() public courseItem: CourseListItem;
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   ngOnInit() {
   }

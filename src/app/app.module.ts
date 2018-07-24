@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { CoursesPageModule } from './courses-page/courses-page.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { ToolboxModule } from './toolbox/toolbox.module';
+import { CourseListModule } from './course-list/course-list.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,7 +14,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    CoursesPageModule
+    FooterModule,
+    CoursesPageModule,
+    ToolboxModule,
+    CourseListModule,
+    CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
