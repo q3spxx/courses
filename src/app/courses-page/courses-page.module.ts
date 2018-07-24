@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderModule } from './header/header.module';
-import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
 import { ToolboxModule } from './toolbox/toolbox.module';
-import { FooterModule } from './footer/footer.module';
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 import { CourseListModule } from './course-list/course-list.module';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    HeaderModule,
-    BreadcrumbsModule,
-    ToolboxModule,
+    CoreModule,
+    SharedModule,
     CourseListModule,
-    FooterModule
+    ToolboxModule
   ],
   declarations: [CoursesPageComponent],
   exports: [CoursesPageComponent]

@@ -4,7 +4,9 @@
       <div class="row">
         <h5 class="col-9">{{courseItem.title}}</h5>
         <p class="col">{{courseItem.duration + " min"}}</p>
-        <p class="col">{{courseItem.creationDate}}</p>
+        <p class="col">{{courseItem.creationDate.getMonth() + '.'
+           + courseItem.creationDate.getDate() + '.'
+           + courseItem.creationDate.getFullYear()}}</p>
         <p class="col-12">{{courseItem.description}}</p>
       </div>
     </div>
