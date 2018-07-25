@@ -1,13 +1,22 @@
-import { Directive, Renderer2, ElementRef, Input } from '@angular/core';
+import { Directive, Renderer2, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appFreshBorderBind]'
+  selector: '[appFreshBorder]'
 })
-export class FreshBorderDirective {
-  @Input(appFreshBorderBind) appFreshBorder: string;
+export class FreshBorderDirective implements OnInit {
+  public freshColor = 'green';
+  public upComingColor = 'blue';
+  @Input() creationDate: Date;
   constructor(private elem: ElementRef, private renderer: Renderer2) {
-    console.log(this.creationDate);
-    this.renderer.setStyle(this.elem.nativeElement, 'background-color', 'blue');
+  }
+  ngOnInit() {
+    const currentDate = new Date();
+    if (this.creationDate.getTime() < currentDate.getTime() &&
+    this.creationDate.getTime() >= currentDate.getTime() - 14 * 86400000) {
+      this.renderer.setStyle(this.elem.nativeElement, 'border-color', this.freshColor);
+    } else if (this.creationDate.getTime() > currentDate.getTime()) {
+      this.renderer.setStyle(this.elem.nativeElement, 'border-color', this.upComingColor);
+    }
   }
 
 }

@@ -15,6 +15,7 @@ export default class CourseListService {
         title: 'Video course 1',
         creationDate: new Date('05 23 2018'),
         duration: 88,
+        topRate: true,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
         'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
@@ -25,6 +26,7 @@ export default class CourseListService {
         title: 'Video course 2',
         creationDate: new Date('06 10 2018'),
         duration: 27,
+        topRate: false,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
         'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
@@ -35,6 +37,7 @@ export default class CourseListService {
         title: 'Video course 3',
         creationDate: new Date('07 14 2018'),
         duration: 70,
+        topRate: true,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
         'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
@@ -45,6 +48,7 @@ export default class CourseListService {
         title: 'Video course 4',
         creationDate: new Date('07 16 2018'),
         duration: 46,
+        topRate: false,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
         'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
@@ -55,6 +59,7 @@ export default class CourseListService {
         title: 'Video course 5',
         creationDate: new Date('08 21 2018'),
         duration: 30,
+        topRate: true,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
         'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +

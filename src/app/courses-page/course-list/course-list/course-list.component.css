@@ -1,3 +1,9 @@
 .course_list {
   margin-top: 1rem;
 }
+.nodata_message {
+  text-align: center;
+  border: 2px solid black;
+  padding: 8px;
+  margin-top: 16px;
+}

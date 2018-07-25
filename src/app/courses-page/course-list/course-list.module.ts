@@ -8,7 +8,11 @@ import { FreshBorderDirective } from './fresh-border.directive';
   imports: [
     CommonModule
   ],
-  declarations: [CourseListComponent, CourseListItemComponent, FreshBorderDirective],
+  declarations: [
+    CourseListComponent,
+    CourseListItemComponent,
+    FreshBorderDirective
+  ],
   exports: [CourseListComponent]
 })
 export class CourseListModule { }

@@ -5,3 +5,19 @@
   padding-left: 15px;
   padding-right: 15px;
 }
+.star {
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+}
+.top_rate {
+  background-image: url('images/star.png');
+}
+.title_block {
+  display: flex;
+  align-items: center;
+}
+h5 {
+  margin-bottom: 0px;
+}
