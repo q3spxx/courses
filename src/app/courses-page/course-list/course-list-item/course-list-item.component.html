@@ -4,14 +4,12 @@
       <div class="row">
         <div class="title col-9">
           <div class="title_block">
-            <h5>{{courseItem.title}}</h5>
+            <h5>{{courseItem.title | uppercase}}</h5>
             <div [ngClass]="{star: true, top_rate: courseItem.topRate}"></div>
           </div>
         </div>
-        <p class="col">{{courseItem.duration + " min"}}</p>
-        <p class="col">{{(courseItem.creationDate.getMonth() + 1) + '.'
-           + courseItem.creationDate.getDate() + '.'
-           + courseItem.creationDate.getFullYear()}}</p>
+        <p class="col">{{courseItem.duration | duration}}</p>
+        <p class="col">{{courseItem.creationDate | date: 'dd.MM.yyyy'}}</p>
         <p class="col-12">{{courseItem.description}}</p>
       </div>
     </div>
