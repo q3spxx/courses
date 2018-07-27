@@ -13,4 +13,7 @@ describe('LoginComponent', () => {
     component.login();
     expect(component.message).toBe('you are logged in');
   });
+  it('should show you are logged out ', () => {
+    expect(component.message).toBe('you are logged ot');
+  });
 });
