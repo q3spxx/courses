@@ -1,9 +1,0 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-<<<<<<< HEAD
-  <h1>Welcome to {{title}}!</h1>
-  <app-courses-page></app-courses-page>
-=======
-	<app-courses-page></app-courses-page>
->>>>>>> task2
-</div>

@@ -21,11 +21,17 @@ export class CourseListComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
   ngOnChanges() {
-    const courseListItems: CourseListItem[] = this.courseListService.getCourseList();
+    this.getList();
+  }
+  getList() {
+    const courseListItems: CourseListItem[] = this.courseListService.getList();
     this.courseListItems = this.filter.transform(courseListItems, this.searchText);
   }
   delete(id: string): void {
-    console.log(id);
+    if (confirm('Do you really want to delete this course?')) {
+      this.courseListService.removeItem(id);
+      this.getList();
+    }
   }
   onClickLoadMore(): void {
     console.log('Load more');
