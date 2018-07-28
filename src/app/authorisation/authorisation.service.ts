@@ -9,30 +9,27 @@ export default class AuthorisationService {
   public fakeUser: User = {
     id: '1234',
     firstName: 'Peter',
-    lastName: 'Parker',
-    token: 'q86bfanyc'
+    lastName: 'Parker'
   };
-  constructor() {
-  }
+  private token = 'q86bfanyc';
+  constructor() {}
   login(): void {
-    localStorage.setItem('user', JSON.stringify(this.fakeUser));
+    console.log('logged in successfully');
+    // localStorage.setItem('token', this.token);
   }
   logout(): void {
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     console.log('logout');
   }
   isAuthenticated(): boolean {
-    const user = localStorage.getItem('user');
-    if (user && user.token === this.fakeUser.token) {
+    const token = localStorage.getItem('token');
+    if (token === this.token) {
       return true;
     } else {
       return false;
     }
   }
   getUserInfo(): User {
-    const user = localStorage.getItem('user');
-    if (user) {
-      return JSON.parse(user);
-    }
+    return this.fakeUser;
   }
 }

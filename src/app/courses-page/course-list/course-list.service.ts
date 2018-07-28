@@ -82,8 +82,8 @@ export default class CourseListService {
       title,
       creationDate,
       duration,
-      topRate,
-      description
+      description,
+      topRate
     ));
   }
   public getItemById(id: string): CourseListItem {

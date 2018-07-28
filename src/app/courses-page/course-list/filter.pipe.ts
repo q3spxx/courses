@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { CourseListItem } from './course-list-item';
 
 @Pipe({
   name: 'filter'

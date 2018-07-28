@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+  <div class="col-6 form_wrap">
+    <h4 class="form_title">Login</h4>
+    <div class="form">
+      <div class="form_input-block">
+        <p class="form_helper-text">Email *Required</p>
+        <input [(ngModel)]="email" name="email" class="form-control" type="email" placeholder="Please enter email">
+      </div>
+      <div class="form_input-block">
+        <p class="form_helper-text">Password *Required</p>
+        <input [(ngModel)]="password" name="password" class="form-control" type="password" placeholder="Please enter password">
+      </div>
+      <button (click)="onLogin()" type="button" class="btn btn-success">Login</button>
+    </div>
+  </div>
+</div>
