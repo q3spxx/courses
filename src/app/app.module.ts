@@ -5,6 +5,8 @@ import { CoursesPageModule } from './courses-page/courses-page.module';
 import { LoginPageModule } from './login-page/login-page.module';
 import { AppComponent } from './app.component';
 
+import AuthorisationService from './authorisation/authorisation.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +16,7 @@ import { AppComponent } from './app.component';
     CoursesPageModule,
     LoginPageModule
   ],
-  providers: [],
+  providers: [AuthorisationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

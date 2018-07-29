@@ -6,18 +6,22 @@ import { User } from './user';
 })
 export default class AuthorisationService {
 
-  public fakeUser: User = {
-    id: '1234',
-    firstName: 'Peter',
-    lastName: 'Parker'
-  };
+  private user: User;
   private token = 'q86bfanyc';
   constructor() {}
   login(): void {
+    const fakeUser = {
+      id: '1234',
+      firstName: 'Peter',
+      lastName: 'Parker'
+    };
+    const fakeToken = 'q86bfanyc';
+    this.user = fakeUser;
+    localStorage.setItem('token', fakeToken);
     console.log('logged in successfully');
-    // localStorage.setItem('token', this.token);
   }
   logout(): void {
+    this.user = undefined;
     localStorage.removeItem('token');
     console.log('logout');
   }
@@ -30,6 +34,6 @@ export default class AuthorisationService {
     }
   }
   getUserInfo(): User {
-    return this.fakeUser;
+    return this.user;
   }
 }
