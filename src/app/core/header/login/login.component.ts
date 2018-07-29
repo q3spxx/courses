@@ -11,19 +11,10 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login(): void {
     this.isLogin = true;
-  }
-
-  get message(): string {
-    if ( this.isLogin ) {
-      return 'you are logged in';
-    } else {
-      return 'you are logged out';
-    }
   }
 
 }

@@ -16,6 +16,7 @@ describe('CourseListComponent', () => {
   }));
 
   beforeEach(() => {
+    spyOn(console, 'log');
     fixture = TestBed.createComponent(CourseListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -23,5 +24,13 @@ describe('CourseListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('console.log should be called with id', () => {
+    component.delete('id');
+    expect(console.log).toHaveBeenCalledWith('id');
+  });
+  it('console.log should be called with id', () => {
+    component.onClickLoadMore();
+    expect(console.log).toHaveBeenCalledWith('Load more');
   });
 });

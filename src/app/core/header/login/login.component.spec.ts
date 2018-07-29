@@ -9,11 +9,11 @@ describe('LoginComponent', () => {
     component = new LoginComponent();
   });
 
-  it('should show you are logged in', () => {
-    component.login();
-    expect(component.message).toBe('you are logged in');
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
-  it('should show you are logged out ', () => {
-    expect(component.message).toBe('you are logged ot');
+  it('should be true', () => {
+    component.login();
+    expect(component.isLogin).toBeTruthy();
   });
 });

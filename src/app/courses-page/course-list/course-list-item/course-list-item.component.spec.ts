@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CourseListItemComponent } from './course-list-item.component';
 import { CourseListItem } from '../course-list-item';
@@ -6,7 +7,8 @@ import { CourseListItem } from '../course-list-item';
 @Component({
   template: `
     <app-course-list-item
-      [courseItem] = 'courseItem' >
+      [courseItem] = 'courseItem'
+      (delete) = 'onDelete($event)' >
     </app-course-list-item>`
 })
 
@@ -18,6 +20,7 @@ class TestHostComponent {
     creationDate: new Date('05 23 2018'),
     description: 'lorem'
   };
+  onDelete() {}
 }
 
 describe('CourseListItemComponent', () => {
@@ -34,10 +37,16 @@ describe('CourseListItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
+    spyOn(testHost, 'onDelete');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(testHost).toBeTruthy();
+  });
+  it('should calls onDelete', () => {
+    const button = fixture.debugElement.query(By.css('.btn-danger'));
+    button.triggerEventHandler('click');
+    expect(testHost.onDelete).toHaveBeenCalled();
   });
 });
