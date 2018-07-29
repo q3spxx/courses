@@ -54,7 +54,7 @@ describe('CourseListItemComponent', () => {
   });
   it('should calls onDelete', () => {
     const button = fixture.debugElement.query(By.css('.btn-danger'));
-    button.triggerEventHandler('click');
+    button.triggerEventHandler('click', null);
     expect(testHost.onDelete).toHaveBeenCalled();
   });
 });
