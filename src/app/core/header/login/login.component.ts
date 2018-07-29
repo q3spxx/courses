@@ -10,24 +10,15 @@ export class LoginComponent implements OnInit {
   public isLogin = false;
 
   constructor() { }
-<<<<<<< HEAD
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
   ngOnInit() {
   }
-=======
-
-  ngOnInit() {}
->>>>>>> task3
 
   login(): void {
     this.isLogin = true;
   }
 
-<<<<<<< HEAD
   onLogout(): void {
     this.logout.emit();
   }
-
-=======
->>>>>>> task3
 }

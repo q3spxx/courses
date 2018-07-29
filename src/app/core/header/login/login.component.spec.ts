@@ -16,7 +16,4 @@ describe('LoginComponent', () => {
     component.login();
     expect(component.isLogin).toBeTruthy();
   });
-  it('should show you are logged out ', () => {
-    expect(component.message).toBe('you are logged ot');
-  });
 });

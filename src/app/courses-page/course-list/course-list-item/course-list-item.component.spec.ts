@@ -3,6 +3,8 @@ import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CourseListItemComponent } from './course-list-item.component';
 import { CourseListItem } from '../course-list-item';
+import { DurationPipe } from '../duration.pipe';
+import { FreshBorderDirective } from '../fresh-border.directive';
 
 @Component({
   template: `
@@ -31,7 +33,12 @@ describe('CourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseListItemComponent, TestHostComponent ]
+      declarations: [
+        CourseListItemComponent,
+        TestHostComponent,
+        DurationPipe,
+        FreshBorderDirective
+      ]
     })
     .compileComponents();
   }));

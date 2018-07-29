@@ -26,8 +26,4 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('console.log should be called', () => {
-    component.logValue();
-    expect(console.log).toHaveBeenCalledWith(component.inputValue);
-  });
 });
