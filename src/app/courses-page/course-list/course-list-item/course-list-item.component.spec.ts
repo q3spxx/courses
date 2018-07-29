@@ -26,6 +26,7 @@ class TestHostComponent {
 describe('CourseListItemComponent', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let component: CourseListItemComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,8 +41,15 @@ describe('CourseListItemComponent', () => {
     spyOn(testHost, 'onDelete');
     fixture.detectChanges();
   });
+  beforeEach(() => {
+    component = new CourseListItemComponent();
+  });
 
-  it('should create', () => {
+  it('Test as class, should create instance', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Test host should be created', () => {
     expect(testHost).toBeTruthy();
   });
   it('should calls onDelete', () => {
