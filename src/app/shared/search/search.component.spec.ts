@@ -16,6 +16,7 @@ describe('SearchComponent', () => {
   }));
 
   beforeEach(() => {
+    spyOn(console, 'log');
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -24,4 +25,5 @@ describe('SearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -10,7 +10,11 @@ import { FilterPipe } from '../filter.pipe';
   providers: [ FilterPipe ]
 })
 export class CourseListComponent implements OnInit, OnChanges {
+<<<<<<< HEAD
+  public courseListItems: CourseListItem[];
+=======
   public courseListItems: CourseListItem[] = [];
+>>>>>>> task4
 
   @Input() public searchText: string;
   constructor(
