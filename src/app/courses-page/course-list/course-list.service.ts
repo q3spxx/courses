@@ -4,7 +4,7 @@ import { CourseListItem } from './course-list-item';
 @Injectable({
   providedIn: 'root'
 })
-export default class CourseListService {
+export class CourseListService {
 
   private courseListItems: CourseListItem[] = [
     {

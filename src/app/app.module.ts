@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { CoursesPageModule } from './courses-page/courses-page.module';
 import { LoginPageModule } from './login-page/login-page.module';
+import { AddCoursePageModule } from './add-course-page/add-course-page.module';
 import { AppComponent } from './app.component';
-import AuthorisationService from './authorisation/authorisation.service';
+import { AuthorisationService } from './authorisation/authorisation.service';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import AuthorisationService from './authorisation/authorisation.service';
   imports: [
     BrowserModule,
     CoursesPageModule,
-    LoginPageModule
+    LoginPageModule,
+    AddCoursePageModule
   ],
   providers: [AuthorisationService],
   bootstrap: [AppComponent]

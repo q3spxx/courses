@@ -4,7 +4,7 @@ import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
-export default class AuthorisationService {
+export class AuthorisationService {
 
   private user: User;
   private token = 'q86bfanyc';

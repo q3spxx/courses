@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CourseListItem } from '../course-list-item';
-import CourseListService from '../course-list.service';
+import { CourseListService } from '../course-list.service';
 import { FilterPipe } from '../filter.pipe';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css'],
-  providers: [ FilterPipe ]
+  styleUrls: ['./course-list.component.css']
 })
 export class CourseListComponent implements OnInit, OnChanges {
   public courseListItems: CourseListItem[] = [];
