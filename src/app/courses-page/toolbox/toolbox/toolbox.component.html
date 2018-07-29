@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-6">
-    <app-search></app-search>
+    <app-search
+      (provideSearchText)="changeSearchText($event)">
+    </app-search>
   </div>
   <div class="col-3 offset-3">
     <app-actions></app-actions>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   public isLogin = false;
 
   constructor() { }
-
+  @Output() logout: EventEmitter<void> = new EventEmitter<void>();
   ngOnInit() {
   }
 
@@ -18,12 +18,8 @@ export class LoginComponent implements OnInit {
     this.isLogin = true;
   }
 
-  get message(): string {
-    if ( this.isLogin ) {
-      return 'you are logged in';
-    } else {
-      return 'you are logged out';
-    }
+  onLogout(): void {
+    this.logout.emit();
   }
 
 }

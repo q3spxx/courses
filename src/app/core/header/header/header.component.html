@@ -3,6 +3,9 @@
     <app-logo></app-logo>
   </div>
   <div class="col-6">
-    <app-login></app-login>
+    <app-login
+      *ngIf="isAuth() === true"
+      (logout)="onLogout($event)">
+   </app-login>
   </div>
 </div>

@@ -1,5 +1,9 @@
 <app-core>
   <app-breadcrumbs></app-breadcrumbs>
-  <app-toolbox></app-toolbox>
-  <app-course-list></app-course-list>
+  <app-toolbox
+    (provideSearchText)="changeSearchText($event)">
+  </app-toolbox>
+  <app-course-list
+  [searchText]="searchText" >
+  </app-course-list>
 </app-core>
