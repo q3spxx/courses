@@ -1,0 +1,10 @@
+<div class="form-group">
+  <label for="durationInput">Duration</label>
+  <input
+    id="durationInput"
+    type="number"
+    class="form-control"
+    name="duration"
+    [value]="durationValue"
+    (input)="onDurationChange($event)">
+</div>

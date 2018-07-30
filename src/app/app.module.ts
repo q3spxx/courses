@@ -17,7 +17,6 @@ import { AuthorisationService } from './authorisation/authorisation.service';
     LoginPageModule,
     AddCoursePageModule
   ],
-  providers: [AuthorisationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
