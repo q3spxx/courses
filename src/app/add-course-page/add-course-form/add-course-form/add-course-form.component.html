@@ -21,7 +21,8 @@
       </textarea>
     </div>
     <app-date-picker
-      (date)="onDateChange()">
+      [dateValue]="date | date: 'yyyy-MM-dd'"
+      (date)="onDateChange($event)">
     </app-date-picker>
     <app-duration-picker
       [durationValue]="duration"
@@ -36,6 +37,7 @@
         save
       </button>
       <button
+        (click)="cancel()"
         class="btn btn-outline-default button"
         type="button"
         name="cancel">

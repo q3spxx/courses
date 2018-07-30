@@ -17,15 +17,14 @@ export class AddCourseFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDateChange(date: Date): void {
-    this.date = date;
+  onDateChange(date: string): void {
+    this.date = new Date(date);
   }
   onDurationChange(duration: number): void {
     this.duration = duration;
   }
 
-  save(): void {
-    console.log(this.title, this.description, this.duration);
-  }
+  save(): void {}
+  cancel(): void {}
 
 }

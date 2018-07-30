@@ -1,4 +1,9 @@
 <div class="form-group">
   <label for="dateInput">Creation date</label>
-  <input id="dateInput" type="date" class="form-control">
+  <input
+    id="dateInput"
+    type="date"
+    class="form-control"
+    [value]="dateValue"
+    (input)="onDateChange($event)">
 </div>

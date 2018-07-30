@@ -2,14 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { OrderByPipe } from '../order-by.pipe';
-import CourseListService from '../course-list.service';
+import { CourseListService } from '../course-list.service';
 import { CourseListComponent } from './course-list.component';
 import { CourseListItem } from '../course-list-item';
+import { FilterPipe } from '../filter.pipe';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
   let fixture: ComponentFixture<CourseListComponent>;
   let courseListService: Partial<CourseListService>;
+  let filterPipe: Partial<FilterPipe>;
   const courseListItemsMock: CourseListItem[] = [{
     id: '1',
     title: 'Video course 1',
@@ -25,10 +27,12 @@ describe('CourseListComponent', () => {
         return courseListItemsMock;
       }
     };
+    filterPipe = {transform(courseListItems: CourseListItem[]) {return courseListItems; }};
     TestBed.configureTestingModule({
       declarations: [ CourseListComponent, OrderByPipe ],
       providers: [
-        { provide: CourseListService, useValue: courseListService }
+        { provide: CourseListService, useValue: courseListService },
+        { provide: FilterPipe, useValue: filterPipe }
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })

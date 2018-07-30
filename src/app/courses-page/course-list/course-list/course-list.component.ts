@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CourseListItem } from '../course-list-item';
 import { CourseListService } from '../course-list.service';
 import { FilterPipe } from '../filter.pipe';
@@ -8,8 +8,9 @@ import { FilterPipe } from '../filter.pipe';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css']
 })
-export class CourseListComponent implements OnInit, OnChanges {
+export class CourseListComponent implements OnInit {
   public courseListItems: CourseListItem[] = [];
+  public filteredCourseListItems: CourseListItem[] = [];
 
   @Input() public searchText: string;
   constructor(
@@ -18,20 +19,23 @@ export class CourseListComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-  }
-  ngOnChanges() {
     this.getList();
+    this.filterOut();
   }
   getList() {
-    const courseListItems: CourseListItem[] = this.courseListService.getList();
-    this.courseListItems = this.filter.transform(courseListItems, this.searchText);
+    this.courseListItems = this.courseListService.getList();
+  }
+  filterOut() {
+    this.filteredCourseListItems = this.filter.transform(this.courseListItems, this.searchText);
   }
   delete(id: string): void {
     if (confirm('Do you really want to delete this course?')) {
       this.courseListService.removeItem(id);
       this.getList();
+      this.filterOut();
     }
   }
+  edit(id: string): void {}
   onClickLoadMore(): void {
     console.log('Load more');
   }

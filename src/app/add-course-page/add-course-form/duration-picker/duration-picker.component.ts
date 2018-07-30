@@ -17,7 +17,7 @@ export class DurationPickerComponent implements OnInit {
 
   onDurationChange(e): void {
     let value = e.target.valueAsNumber;
-    if (value === NaN) { value = 0; }
+    if (isNaN(value)) { value = 0; }
     this.duration.emit(value);
   }
 
