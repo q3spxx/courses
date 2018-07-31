@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorisationService } from '../../authorisation/authorisation.service';
+import { AuthorisationService } from '../../services/authorisation/authorisation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-form',
@@ -11,14 +12,19 @@ export class AuthFormComponent implements OnInit {
   public email = '';
   public password = '';
 
-  constructor(private authService: AuthorisationService) { }
+  constructor(private authService: AuthorisationService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.logout();
   }
 
   onLogin(): void {
     this.authService.login();
+    this.auth();
+  }
+  auth() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/courses');
+    }
   }
 
 }

@@ -5,7 +5,7 @@ import { CourseListItemComponent } from './course-list-item/course-list-item.com
 import { FreshBorderDirective } from './fresh-border.directive';
 import { DurationPipe } from './duration.pipe';
 import { OrderByPipe } from './order-by.pipe';
-import { CourseListService } from './course-list.service';
+import { CoursesService } from '../../services/courses/courses.service';
 import { FilterPipe } from './filter.pipe';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { FilterPipe } from './filter.pipe';
     OrderByPipe,
     FilterPipe
   ],
-  providers: [CourseListService, FilterPipe],
+  providers: [CoursesService, FilterPipe],
   exports: [CourseListComponent]
 })
 export class CourseListModule { }

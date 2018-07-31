@@ -5,8 +5,7 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy } from '@angular/core';
-import { CourseListItem } from '../course-list-item';
-import {  } from '@angular/co';
+import { CourseListItem } from '../../../interfaces/course-list-item';
 
 @Component({
   selector: 'app-course-list-item',

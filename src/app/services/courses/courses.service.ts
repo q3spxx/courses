@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CourseListItem } from './course-list-item';
+import { CourseListItem } from '../../interfaces/course-list-item';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseListService {
+export class CoursesService {
 
   private courseListItems: CourseListItem[] = [
     {
@@ -71,18 +71,18 @@ export class CourseListService {
   }
   public createItem(
     title: string,
+    description: string,
     creationDate: Date,
     duration: number,
-    topRate: boolean,
-    description: string
+    topRate: boolean
   ): void {
     const id =  Math.random().toString(36).substr(2, 9);
     this.courseListItems.push(new CourseListItem(
       id,
       title,
+      description,
       creationDate,
       duration,
-      description,
       topRate
     ));
   }
@@ -96,19 +96,19 @@ export class CourseListService {
   public updateItem(
     id: string,
     title: string,
+    description: string,
     creationDate: Date,
     duration: number,
-    topRate: boolean,
-    description: string
+    topRate: boolean
   ): void {
     for (let i = 0; i < this.courseListItems.length; i++) {
       if (this.courseListItems[i].id === id) {
         const item = this.courseListItems[i];
         item.title = title;
+        item.description = description;
         item.creationDate = creationDate;
         item.duration = duration;
         item.topRate = topRate;
-        item.description = description;
         return;
       }
     }

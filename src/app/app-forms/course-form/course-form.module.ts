@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AddCourseFormComponent } from './add-course-form/add-course-form.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { DurationPickerComponent } from './duration-picker/duration-picker.component';
 
@@ -10,7 +10,7 @@ import { DurationPickerComponent } from './duration-picker/duration-picker.compo
     CommonModule,
     FormsModule
   ],
-  declarations: [AddCourseFormComponent, DatePickerComponent, DurationPickerComponent],
-  exports: [AddCourseFormComponent]
+  declarations: [CourseFormComponent, DatePickerComponent, DurationPickerComponent],
+  exports: [CourseFormComponent]
 })
-export class AddCourseFormModule { }
+export class CourseFormModule { }

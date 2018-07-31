@@ -8,16 +8,16 @@ export class CourseListItem {
   constructor(
     _id: string,
     _title: string,
+    _description: string,
     _creationDate: Date,
     _duration: number,
-    _description: string,
     _topRate: boolean
   ) {
     this.id = _id;
     this.title = _title,
+    this.description = _description;
     this.creationDate = _creationDate;
     this.duration = _duration;
-    this.description = _description;
     this.topRate = _topRate;
   }
 }

@@ -7,7 +7,7 @@ import { LoginPageModule } from './login-page/login-page.module';
 import { AddCoursePageModule } from './add-course-page/add-course-page.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { AppComponent } from './app.component';
-import { AuthorisationService } from './authorisation/authorisation.service';
+import { AuthorisationService } from './services/authorisation/authorisation.service';
 
 @NgModule({
   declarations: [

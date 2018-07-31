@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CourseListItemComponent } from './course-list-item.component';
-import { CourseListItem } from '../course-list-item';
+import { CourseListItem } from '../../../interfaces/course-list-item';
 import { DurationPipe } from '../duration.pipe';
 import { FreshBorderDirective } from '../fresh-border.directive';
 
