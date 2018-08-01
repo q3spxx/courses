@@ -8,6 +8,7 @@ import { AddCoursePageModule } from './add-course-page/add-course-page.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { AppComponent } from './app.component';
 import { AuthorisationService } from './services/authorisation/authorisation.service';
+import { CanActivateGuard } from './guards/can-activate.guard';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { AuthorisationService } from './services/authorisation/authorisation.ser
     NotFoundModule,
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
-  providers: [AuthorisationService],
+  providers: [AuthorisationService, CanActivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

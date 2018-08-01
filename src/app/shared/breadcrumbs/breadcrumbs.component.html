@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-12">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">Courses</li>
-      <li class="breadcrumb-item active">Video course 5</li>
+      <li *ngFor="let item of crumbs" class="breadcrumb-item">
+        <a routerLink={{item.url}} routerLinkActive="active">{{item.name}}</a>
+      </li>
+      <li class="breadcrumb-item active">{{currentPath.name}}</li>
     </ol>
   </div>
 </div>
