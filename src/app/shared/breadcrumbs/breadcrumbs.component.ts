@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Breadcrumb } from './breadcrumb';
+import { CoursesService } from '../../services/courses/courses.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -11,14 +12,15 @@ export class BreadcrumbsComponent implements OnInit {
 
   private map = {
     courses: 'Courses',
-    new: 'New Course',
-    videoCourse: 'Video course '
+    new: 'New Course'
   };
 
   public crumbs: Breadcrumb[] = [];
   public currentPath: Breadcrumb;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private coursesService: CoursesService) { }
 
   ngOnInit() {
     const path = this.router.url.split('/');
@@ -30,7 +32,8 @@ export class BreadcrumbsComponent implements OnInit {
         if (this.map[item]) {
           return new Breadcrumb( '/' + itemPath.join('/'), this.map[item]);
         } else {
-          return new Breadcrumb( '/' + itemPath.join('/'), this.map.videoCourse + item);
+          const courseItem = this.coursesService.getItemById(item);
+          return new Breadcrumb( '/' + itemPath.join('/'), courseItem.title);
         }
       });
       this.currentPath = this.crumbs.pop();

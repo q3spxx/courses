@@ -8,8 +8,8 @@ import { CanActivateGuard } from './guards/can-activate.guard';
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: '/courses', pathMatch: 'full' },
-    { path: 'courses', component: CoursesPageComponent },
-    { path: 'courses/new', component: AddCoursePageComponent },
+    { path: 'courses', component: CoursesPageComponent, canActivate: [CanActivateGuard] },
+    { path: 'courses/new', component: AddCoursePageComponent, canActivate: [CanActivateGuard] },
     { path: 'courses/:id', component: EditCoursePageComponent, canActivate: [CanActivateGuard] },
     { path: 'login', component: LoginPageComponent },
     { path: 'not-found-404', component: NotFoundComponent },

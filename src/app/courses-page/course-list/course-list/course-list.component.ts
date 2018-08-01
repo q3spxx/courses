@@ -3,6 +3,7 @@ import { CourseListItem } from '../../../interfaces/course-list-item';
 import { CoursesService } from '../../../services/courses/courses.service';
 import { FilterPipe } from '../filter.pipe';
 import { Router } from '@angular/router';
+import { AuthorisationService } from '../../../services/authorisation/authorisation.service';
 
 @Component({
   selector: 'app-course-list',
@@ -17,7 +18,8 @@ export class CourseListComponent implements OnInit, DoCheck {
   constructor(
     private courseListService: CoursesService,
     private filter: FilterPipe,
-    private router: Router
+    private router: Router,
+    private authService: AuthorisationService
   ) { }
 
   ngOnInit() {
@@ -33,9 +35,13 @@ export class CourseListComponent implements OnInit, DoCheck {
     this.filteredCourseListItems = this.filter.transform(this.courseListItems, this.searchText);
   }
   delete(id: string): void {
-    if (confirm('Do you really want to delete this course?')) {
-      this.courseListService.removeItem(id);
-      this.getList();
+    if (this.authService.isAuthenticated()) {
+      if (confirm('Do you really want to delete this course?')) {
+        this.courseListService.removeItem(id);
+        this.getList();
+      }
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
   edit(id: string): void {
