@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseListFields } from '../../interfaces/course-list-fields';
-import { AuthorisationService } from '../../services/authorisation/authorisation.service';
 
 @Component({
   selector: 'app-edit-course-page',
@@ -22,13 +21,9 @@ export class EditCoursePageComponent implements OnInit {
     private coursesService: CoursesService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthorisationService
   ) { }
 
   ngOnInit() {
-    if (!this.authService.isAuthenticated()) {
-      this.router.navigateByUrl('/login');
-    }
     this.route.params.subscribe((data) => {
       const item = this.coursesService.getItemById(data['id']);
       this.id = item.id;

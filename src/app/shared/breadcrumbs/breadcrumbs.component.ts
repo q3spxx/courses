@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Breadcrumb } from './breadcrumb';
 import { CoursesService } from '../../services/courses/courses.service';
+import breadcrumbsEnum from './breadcrumbs.enum';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -9,11 +10,6 @@ import { CoursesService } from '../../services/courses/courses.service';
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit {
-
-  private map = {
-    courses: 'Courses',
-    new: 'New Course'
-  };
 
   public crumbs: Breadcrumb[] = [];
   public currentPath: Breadcrumb;
@@ -29,8 +25,8 @@ export class BreadcrumbsComponent implements OnInit {
     if (path.length > 0) {
       this.crumbs = path.map((item: string, i: number) => {
         let itemPath = path.slice(0, i + 1);
-        if (this.map[item]) {
-          return new Breadcrumb( '/' + itemPath.join('/'), this.map[item]);
+        if (breadcrumbsEnum[item]) {
+          return new Breadcrumb( '/' + itemPath.join('/'), breadcrumbsEnum[item]);
         } else {
           const courseItem = this.coursesService.getItemById(item);
           return new Breadcrumb( '/' + itemPath.join('/'), courseItem.title);

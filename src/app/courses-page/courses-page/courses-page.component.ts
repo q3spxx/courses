@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorisationService } from '../../services/authorisation/authorisation.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -11,13 +10,10 @@ export class CoursesPageComponent implements OnInit {
 
   public searchText = '';
 
-  constructor(private authService: AuthorisationService, private router: Router) {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
-    if (!this.authService.isAuthenticated()) {
-      this.router.navigateByUrl('/login');
-    }
   }
 
   changeSearchText(text: string) {
