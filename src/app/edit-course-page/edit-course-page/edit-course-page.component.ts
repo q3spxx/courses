@@ -10,7 +10,7 @@ import { CourseListFields } from '../../interfaces/course-list-fields';
 })
 export class EditCoursePageComponent implements OnInit {
 
-  public id: string;
+  public id: number;
   public title: string;
   public description: string;
   public creationDate: Date;

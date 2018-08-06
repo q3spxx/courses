@@ -9,8 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AuthFormComponent implements OnInit {
 
-  public email = '';
+  public login = '';
   public password = '';
+  public error = false;
+  public errorMess = '';
 
   constructor(private authService: AuthorisationService, private router: Router) { }
 
@@ -18,13 +20,14 @@ export class AuthFormComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.authService.login();
-    this.auth();
-  }
-  auth() {
-    if (this.authService.isAuthenticated()) {
+    this.authService.login(this.login, this.password).subscribe(() => {
+      this.error = false;
+      this.errorMess = '';
       this.router.navigateByUrl('/courses');
-    }
+    }, err => {
+      this.error = true;
+      this.errorMess = err.error;
+    });
   }
 
 }

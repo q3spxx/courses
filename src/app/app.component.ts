@@ -9,9 +9,5 @@ import { AuthorisationService } from './services/authorisation/authorisation.ser
 export class AppComponent implements OnInit {
   title = 'courses';
   constructor(private authService: AuthorisationService) {}
-  ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.authService.fetchUserInfo();
-    }
-  }
+  ngOnInit() {}
 }

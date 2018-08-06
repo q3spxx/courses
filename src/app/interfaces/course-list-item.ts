@@ -1,12 +1,12 @@
 export class CourseListItem {
-  public id: string;
+  public id: number;
   public title: string;
   public creationDate: Date;
   public duration: number;
   public description: string;
   public topRate: boolean;
   constructor(
-    _id: string,
+    _id: number,
     _title: string,
     _description: string,
     _creationDate: Date,

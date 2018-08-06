@@ -9,6 +9,7 @@ import { NotFoundModule } from './not-found/not-found.module';
 import { AppComponent } from './app.component';
 import { AuthorisationService } from './services/authorisation/authorisation.service';
 import { AuthGuard } from './guards/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthGuard } from './guards/auth.guard';
     LoginPageModule,
     AddCoursePageModule,
     NotFoundModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
   providers: [AuthorisationService, AuthGuard],

@@ -13,31 +13,36 @@ import { AuthorisationService } from '../../../services/authorisation/authorisat
 export class CourseListComponent implements OnInit, DoCheck {
   public courseListItems: CourseListItem[] = [];
   public filteredCourseListItems: CourseListItem[] = [];
+  private page = 0;
+  private count = 5;
 
   @Input() public searchText: string;
   constructor(
-    private courseListService: CoursesService,
+    private coursesService: CoursesService,
     private filter: FilterPipe,
     private router: Router,
     private authService: AuthorisationService
   ) { }
 
   ngOnInit() {
-    this.getList();
+    this.coursesService.fetchList(this.page * this.count, this.count)
+      .subscribe(() => {
+        this.getList();
+    });
   }
   ngDoCheck() {
     this.filterOut();
   }
   getList() {
-    this.courseListItems = this.courseListService.getList();
+    this.courseListItems = this.coursesService.getList();
   }
   filterOut() {
     this.filteredCourseListItems = this.filter.transform(this.courseListItems, this.searchText);
   }
-  delete(id: string): void {
+  delete(id: number): void {
     if (this.authService.isAuthenticated()) {
       if (confirm('Do you really want to delete this course?')) {
-        this.courseListService.removeItem(id);
+        this.coursesService.removeItem(id);
         this.getList();
       }
     } else {
@@ -47,8 +52,12 @@ export class CourseListComponent implements OnInit, DoCheck {
   edit(id: string): void {
     this.router.navigate(['courses', id]);
   }
-  onClickLoadMore(): void {
-    console.log('Load more');
+  onClickLoadMore(event): void {
+    this.page++;
+    this.coursesService.fetchList(this.page * this.count, this.count)
+      .subscribe(() => {
+        this.getList();
+    });
   }
 
 }

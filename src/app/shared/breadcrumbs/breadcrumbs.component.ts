@@ -28,7 +28,7 @@ export class BreadcrumbsComponent implements OnInit {
         if (breadcrumbsEnum[item]) {
           return new Breadcrumb( '/' + itemPath.join('/'), breadcrumbsEnum[item]);
         } else {
-          const courseItem = this.coursesService.getItemById(item);
+          const courseItem = this.coursesService.getItemById(+item);
           return new Breadcrumb( '/' + itemPath.join('/'), courseItem.title);
         }
       });

@@ -1,74 +1,41 @@
 import { Injectable } from '@angular/core';
 import { CourseListItem } from '../../interfaces/course-list-item';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CourseListItemData } from '../../interfaces/course-list-item-data';
+import CONFIG from '../../app.config';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  private courseListItems: CourseListItem[] = [
-    {
-      id: '1',
-      title: 'Video course 1',
-      creationDate: new Date('05 23 2018'),
-      duration: 88,
-      topRate: true,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
-      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
-    },
-    {
-      id: '2',
-      title: 'Video course 2',
-      creationDate: new Date('06 10 2018'),
-      duration: 27,
-      topRate: false,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
-      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
-    },
-    {
-      id: '3',
-      title: 'Video course 3',
-      creationDate: new Date('07 14 2018'),
-      duration: 70,
-      topRate: true,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
-      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
-    },
-    {
-      id: '4',
-      title: 'Video course 4',
-      creationDate: new Date('07 16 2018'),
-      duration: 46,
-      topRate: false,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
-      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
-    },
-    {
-      id: '5',
-      title: 'Video course 5',
-      creationDate: new Date('08 21 2018'),
-      duration: 30,
-      topRate: true,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, ' +
-      'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in'
+  private courseListItems: CourseListItem[] = [];
+
+  constructor(private http: HttpClient) { }
+
+  public fetchList(start: number, count: number): Observable<void> {
+      return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses?start=${start}&count=${count}`)
+      .pipe(map((coursesData: CourseListItemData[]) => {
+          const courses = coursesData.map((courseData: CourseListItemData) => {
+            return new CourseListItem(
+              courseData.id,
+              courseData.name,
+              courseData.description,
+              new Date(courseData.date),
+              courseData.length,
+              courseData.isTopRated
+            );
+          });
+          this.courseListItems = this.courseListItems.concat(courses);
+        })
+      )
     }
-  ];
-
-  constructor() { }
-
-  public getList(): CourseListItem[] {
-    return this.courseListItems;
-  }
+    public getList(): CourseListItem[] {
+      return this.courseListItems;
+    }
   public createItem(
     title: string,
     description: string,
@@ -76,7 +43,7 @@ export class CoursesService {
     duration: number,
     topRate: boolean
   ): void {
-    const id =  Math.random().toString(36).substr(2, 9);
+    const id =  Math.floor(Math.random() * 10000);
     this.courseListItems.push(new CourseListItem(
       id,
       title,
@@ -86,7 +53,7 @@ export class CoursesService {
       topRate
     ));
   }
-  public getItemById(id: string): CourseListItem {
+  public getItemById(id: number): CourseListItem {
     for (let i = 0; i < this.courseListItems.length; i++) {
       if (this.courseListItems[i].id === id) {
         return this.courseListItems[i];
@@ -94,7 +61,7 @@ export class CoursesService {
     }
   }
   public updateItem(
-    id: string,
+    id: number,
     title: string,
     description: string,
     creationDate: Date,
@@ -113,7 +80,7 @@ export class CoursesService {
       }
     }
   }
-  public removeItem(id: string): void {
+  public removeItem(id: number): void {
     for (let i = 0; i < this.courseListItems.length; i++) {
       if (this.courseListItems[i].id === id) {
         this.courseListItems.splice(i, 1);

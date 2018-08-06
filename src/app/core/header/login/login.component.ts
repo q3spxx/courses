@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { User } from '../../../interfaces/user';
-import { AuthorisationService } from '../../../services/authorisation/authorisation.service';
+import { User } from '../../../interfaces/auth';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +8,13 @@ import { AuthorisationService } from '../../../services/authorisation/authorisat
 })
 export class LoginComponent implements OnInit {
 
-  public user: User;
   public isLogin = false;
 
-  constructor(
-    private authService: AuthorisationService
-  ) { }
-
+  @Input() user: User;
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
-  ngOnInit() {
-    this.user = this.authService.getUserInfo();
-  }
-
-  login(): void {
-    this.isLogin = true;
-  }
+  ngOnInit() {}
 
   onLogout(): void {
     this.logout.emit();
-  }
-
-  get message(): string {
-    if ( this.isLogin ) {
-      return 'you are logged in';
-    } else {
-      return 'you are logged out';
-    }
   }
 }

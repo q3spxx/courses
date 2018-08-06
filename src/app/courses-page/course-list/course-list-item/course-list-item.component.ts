@@ -17,8 +17,8 @@ import { CourseListItem } from '../../../interfaces/course-list-item';
 export class CourseListItemComponent implements OnInit {
   constructor() { }
   @Input() public courseItem: CourseListItem;
-  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
-  @Output() edit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() edit: EventEmitter<number> = new EventEmitter<number>();
   ngOnInit() {}
 
   onDelete(): void {

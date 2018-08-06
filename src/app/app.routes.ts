@@ -7,7 +7,7 @@ import { EditCoursePageComponent } from './edit-course-page/edit-course-page/edi
 import { AuthGuard } from './guards/auth.guard';
 
 export const ROUTES: Routes = [
-    { path: '', redirectTo: '/courses', pathMatch: 'full' },
+    { path: '', redirectTo: '/courses', pathMatch: 'full', canActivate: [AuthGuard] },
     { path: 'courses', component: CoursesPageComponent, canActivate: [AuthGuard] },
     { path: 'courses/new', component: AddCoursePageComponent, canActivate: [AuthGuard] },
     { path: 'courses/:id', component: EditCoursePageComponent, canActivate: [AuthGuard] },
