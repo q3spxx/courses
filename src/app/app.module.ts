@@ -9,7 +9,8 @@ import { NotFoundModule } from './not-found/not-found.module';
 import { AppComponent } from './app.component';
 import { AuthorisationService } from './services/authorisation/authorisation.service';
 import { AuthGuard } from './guards/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/authorisation/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
-  providers: [AuthorisationService, AuthGuard],
+  providers: [
+    AuthorisationService,
+    AuthGuard,
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

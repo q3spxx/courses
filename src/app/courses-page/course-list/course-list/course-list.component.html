@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="nodata_message" *ngIf="courseListItems.length === 0">No data, feel free to add course</div>
     <ul class="course_list list-group">
-      <app-course-list-item *ngFor="let item of filteredCourseListItems | orderBy"
+      <app-course-list-item *ngFor="let item of courseListItems | orderBy"
         [courseItem]="item"
         (delete)="delete($event)"
         (edit)="edit($event)">

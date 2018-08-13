@@ -16,26 +16,23 @@ export class CoursesService {
 
   constructor(private http: HttpClient) { }
 
-  public fetchList(start: number, count: number): Observable<void> {
-      return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses?start=${start}&count=${count}`)
-      .pipe(map((coursesData: CourseListItemData[]) => {
-          const courses = coursesData.map((courseData: CourseListItemData) => {
-            return new CourseListItem(
-              courseData.id,
-              courseData.name,
-              courseData.description,
-              new Date(courseData.date),
-              courseData.length,
-              courseData.isTopRated
-            );
-          });
-          this.courseListItems = this.courseListItems.concat(courses);
-        })
-      )
-    }
-    public getList(): CourseListItem[] {
-      return this.courseListItems;
-    }
+  public getList(start: number, count: number, textFragment: string): Observable<CourseListItem[]> {
+    return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses?start=${start}&count=${count}&textFragment=${textFragment}`)
+    .pipe(map((coursesData: CourseListItemData[]) => {
+        const courses = coursesData.map((courseData: CourseListItemData) => {
+          return new CourseListItem(
+            courseData.id,
+            courseData.name,
+            courseData.description,
+            new Date(courseData.date),
+            courseData.length,
+            courseData.isTopRated
+          );
+        });
+        return courses;
+      })
+    )
+  }
   public createItem(
     title: string,
     description: string,
@@ -43,15 +40,14 @@ export class CoursesService {
     duration: number,
     topRate: boolean
   ): void {
-    const id =  Math.floor(Math.random() * 10000);
-    this.courseListItems.push(new CourseListItem(
-      id,
+    console.log(111);
+    this.http.post('/courses/new', {
       title,
       description,
-      creationDate,
+      creationDate: creationDate.toJSON(),
       duration,
       topRate
-    ));
+    }).subscribe();
   }
   public getItemById(id: number): CourseListItem {
     for (let i = 0; i < this.courseListItems.length; i++) {

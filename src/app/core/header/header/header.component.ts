@@ -11,7 +11,11 @@ import { User } from '../../../interfaces/auth';
 export class HeaderComponent implements OnInit {
 
   public isAuth = false;
-  public user: User;
+  public user: User = {
+    id: 0,
+    firstName: '',
+    lastName: ''
+  };
 
   constructor(
     private authService: AuthorisationService,
@@ -19,9 +23,13 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.isAuthenticated().subscribe((isAuth: boolean) => {
-      this.isAuth = isAuth;
-      if (isAuth) this.user = this.authService.getUserInfo();
+    this.authService.isAuthenticated().subscribe(() => {
+      this.isAuth = true;
+      this.authService.getUserInfo().subscribe((user: User) => {
+        this.user = user;
+      });
+    }, () => {
+      this.isAuth = false;
     });
   }
   onLogout(): void {
