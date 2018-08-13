@@ -39,15 +39,14 @@ export class CoursesService {
     creationDate: Date,
     duration: number,
     topRate: boolean
-  ): void {
-    console.log(111);
-    this.http.post('/courses/new', {
+  ): Observable<Object> {
+    return this.http.post(`${CONFIG.host}/courses`, new CourseListItemData(
       title,
       description,
-      creationDate: creationDate.toJSON(),
+      creationDate,
       duration,
       topRate
-    }).subscribe();
+    ));
   }
   public getItemById(id: number): CourseListItem {
     for (let i = 0; i < this.courseListItems.length; i++) {
@@ -76,12 +75,7 @@ export class CoursesService {
       }
     }
   }
-  public removeItem(id: number): void {
-    for (let i = 0; i < this.courseListItems.length; i++) {
-      if (this.courseListItems[i].id === id) {
-        this.courseListItems.splice(i, 1);
-        return;
-      }
-    }
+  public removeItem(id: number): Observable<Object> {
+    return this.http.delete(`${CONFIG.host}/courses/${id}`);
   }
 }

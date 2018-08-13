@@ -33,7 +33,7 @@ export class AddCoursePageComponent implements OnInit {
       fields.creationDate,
       fields.duration,
       true
-    );
+    ).subscribe();
     this.router.navigateByUrl('/courses');
   }
   onCancel(): void {

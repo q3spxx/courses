@@ -48,8 +48,9 @@ export class CourseListComponent implements OnInit {
   delete(id: number): void {
     if (this.authService.isAuthenticated()) {
       if (confirm('Do you really want to delete this course?')) {
-        this.coursesService.removeItem(id);
-        this.getList();
+        this.coursesService.removeItem(id).subscribe(() => {
+          this.getList();
+        });
       }
     } else {
       this.router.navigateByUrl('/login');
