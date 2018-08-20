@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseListFields } from '../../interfaces/course-list-fields';
+import { CourseListItem } from '../../interfaces/course-list-item';
 
 @Component({
   selector: 'app-edit-course-page',
@@ -24,14 +25,15 @@ export class EditCoursePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((data) => {
-      const item = this.coursesService.getItemById(data['id']);
-      this.id = item.id;
-      this.title = item.title;
-      this.description = item.description;
-      this.creationDate = item.creationDate;
-      this.duration = item.duration;
-      this.topRate = item.topRate;
+    this.route.params.subscribe((data: any) => {
+      this.coursesService.getItemById(data['id']).subscribe((item: CourseListItem) => {
+        this.id = item.id;
+        this.title = item.title;
+        this.description = item.description;
+        this.creationDate = item.creationDate;
+        this.duration = item.duration;
+        this.topRate = item.topRate;
+      });
     });
   }
 
@@ -43,8 +45,9 @@ export class EditCoursePageComponent implements OnInit {
       fields.creationDate,
       fields.duration,
       this.topRate
-    );
-    this.router.navigateByUrl('/courses');
+    ).subscribe(() => {
+      this.router.navigateByUrl('/courses');
+    });
   }
   onCancel(): void {
     this.router.navigateByUrl('/courses');

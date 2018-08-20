@@ -33,8 +33,9 @@ export class AddCoursePageComponent implements OnInit {
       fields.creationDate,
       fields.duration,
       true
-    );
-    this.router.navigateByUrl('/courses');
+    ).subscribe(() => {
+      this.router.navigateByUrl('/courses');
+    });
   }
   onCancel(): void {
     this.router.navigateByUrl('/courses');

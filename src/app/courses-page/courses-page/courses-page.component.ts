@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,7 +9,7 @@ export class CoursesPageComponent implements OnInit {
 
   public searchText = '';
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {

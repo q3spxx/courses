@@ -8,8 +8,6 @@ import { User } from '../../../interfaces/auth';
 })
 export class LoginComponent implements OnInit {
 
-  public isLogin = false;
-
   @Input() user: User;
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
   ngOnInit() {}

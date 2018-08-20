@@ -1,39 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Breadcrumb } from './breadcrumb';
-import { CoursesService } from '../../services/courses/courses.service';
-import breadcrumbsEnum from './breadcrumbs.enum';
+import breadcrumbsMap from './breadcrumbs-map';
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css']
 })
-export class BreadcrumbsComponent implements OnInit {
-
-  public crumbs: Breadcrumb[] = [];
-  public currentPath: Breadcrumb;
-
+export class BreadcrumbsComponent implements OnInit, OnChanges {
+  
+  @Input() public title = '';
+  @Input() public id = 0;
+  
+  public breadcrumbs: Breadcrumb[] = [];
+  public currentPath: Breadcrumb = new Breadcrumb('', '');
+  
   constructor(
-    private router: Router,
-    private coursesService: CoursesService) { }
-
+    private router: Router) { }
+    
+  ngOnChanges() {
+    this.selectPath();
+  }
   ngOnInit() {
-    const path = this.router.url.split('/');
-    path.shift();
-
-    if (path.length > 0) {
-      this.crumbs = path.map((item: string, i: number) => {
-        let itemPath = path.slice(0, i + 1);
-        if (breadcrumbsEnum[item]) {
-          return new Breadcrumb( '/' + itemPath.join('/'), breadcrumbsEnum[item]);
-        } else {
-          const courseItem = this.coursesService.getItemById(+item);
-          return new Breadcrumb( '/' + itemPath.join('/'), courseItem.title);
+    this.selectPath();
+  }
+  selectPath() {
+    switch(this.router.url) {
+      case '/courses':
+      this.makeBreadCrumbs([...breadcrumbsMap['/courses']]);
+      break;
+      case '/courses/new':
+      this.makeBreadCrumbs([...breadcrumbsMap['/courses/new']]);
+      break;
+      default:
+      this.makeBreadCrumbs(breadcrumbsMap['/courses/:id'].map((breadcrumb) => {
+        return {
+          name: breadcrumb.name.replace(':title', this.title),
+          url: breadcrumb.url.replace(':id', `${this.id}`)
         }
-      });
-      this.currentPath = this.crumbs.pop();
+      }))
     }
   }
-
+  makeBreadCrumbs(breadcrumbs: any) {
+    if (breadcrumbs.length > 0) {
+      const currentPath = breadcrumbs.pop();
+      this.currentPath = new Breadcrumb(currentPath.name, currentPath.url);
+    }
+    this.breadcrumbs = breadcrumbs.map((breadcrumb: any) => {
+      return  new Breadcrumb(breadcrumb.name, breadcrumb.url);
+    });
+  }
 }

@@ -39,22 +39,26 @@ export class CoursesService {
     creationDate: Date,
     duration: number,
     topRate: boolean
-  ): void {
-    console.log(111);
-    this.http.post('/courses/new', {
+  ): Observable<Object> {
+    return this.http.post(`${CONFIG.host}/courses`, new CourseListItemData(
       title,
       description,
-      creationDate: creationDate.toJSON(),
-      duration,
-      topRate
-    }).subscribe();
+      topRate,
+      creationDate.toJSON(),
+      duration
+    ));
   }
-  public getItemById(id: number): CourseListItem {
-    for (let i = 0; i < this.courseListItems.length; i++) {
-      if (this.courseListItems[i].id === id) {
-        return this.courseListItems[i];
-      }
-    }
+  public getItemById(id: number): Observable<CourseListItem> {
+    return this.http.get(`${CONFIG.host}/courses/${id}`).pipe(map((data: CourseListItemData) => {
+      return new CourseListItem(
+        data.id,
+        data.name,
+        data.description,
+        new Date(data.date),
+        data.length,
+        data.isTopRated
+      );
+    }));
   }
   public updateItem(
     id: number,
@@ -63,25 +67,16 @@ export class CoursesService {
     creationDate: Date,
     duration: number,
     topRate: boolean
-  ): void {
-    for (let i = 0; i < this.courseListItems.length; i++) {
-      if (this.courseListItems[i].id === id) {
-        const item = this.courseListItems[i];
-        item.title = title;
-        item.description = description;
-        item.creationDate = creationDate;
-        item.duration = duration;
-        item.topRate = topRate;
-        return;
-      }
-    }
+  ): Observable<Object> {
+    return this.http.put(`${CONFIG.host}/courses/${id}`, new CourseListItemData(
+      title,
+      description,
+      topRate,
+      creationDate.toJSON(),
+      duration
+    ));
   }
-  public removeItem(id: number): void {
-    for (let i = 0; i < this.courseListItems.length; i++) {
-      if (this.courseListItems[i].id === id) {
-        this.courseListItems.splice(i, 1);
-        return;
-      }
-    }
+  public removeItem(id: number): Observable<Object> {
+    return this.http.delete(`${CONFIG.host}/courses/${id}`);
   }
 }

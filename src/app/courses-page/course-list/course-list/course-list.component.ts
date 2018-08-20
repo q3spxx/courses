@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CourseListItem } from '../../../interfaces/course-list-item';
 import { CoursesService } from '../../../services/courses/courses.service';
-import { FilterPipe } from '../filter.pipe';
 import { Router } from '@angular/router';
-import { AuthorisationService } from '../../../services/authorisation/authorisation.service';
 
 @Component({
   selector: 'app-course-list',
@@ -12,7 +10,6 @@ import { AuthorisationService } from '../../../services/authorisation/authorisat
 })
 export class CourseListComponent implements OnInit {
   public courseListItems: CourseListItem[] = [];
-  public filteredCourseListItems: CourseListItem[] = [];
   private page = 0;
   private count = 5;
   private _searchText = '';
@@ -20,10 +17,10 @@ export class CourseListComponent implements OnInit {
 
   @Input()
   set searchText (value: string) {
-    if (this._searchText !== value) {
-      this._searchText = value;
-      this.getList();
-    }
+    this._searchText = value;
+    this.page = 0;
+    this.count = 5;
+    this.getList();
   }
   get searchText () {
     return this._searchText;
@@ -31,9 +28,7 @@ export class CourseListComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private filter: FilterPipe,
     private router: Router,
-    private authService: AuthorisationService
   ) { }
 
   ngOnInit() {
@@ -46,20 +41,23 @@ export class CourseListComponent implements OnInit {
     });
   }
   delete(id: number): void {
-    if (this.authService.isAuthenticated()) {
-      if (confirm('Do you really want to delete this course?')) {
-        this.coursesService.removeItem(id);
+    if (confirm(`Do you really want to delete this course with id=${id}?`)) {
+      this.coursesService.removeItem(id).subscribe(() => {
         this.getList();
-      }
-    } else {
-      this.router.navigateByUrl('/login');
+      }, () => {
+        this.router.navigateByUrl('/login');
+      });
     }
   }
-  edit(id: string): void {
+  edit(id: number): void {
     this.router.navigate(['courses', id]);
   }
-  onClickLoadMore(event): void {
-    this.page++;
+  onClickLoadMore(): void {
+    if (this.courseListItems.length === 0) {
+      this.page = 0;
+    } else {
+      this.page++;
+    }
     this.getList();
   }
 }
