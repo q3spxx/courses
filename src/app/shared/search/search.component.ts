@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -8,15 +9,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchComponent implements OnInit {
 
   public inputValue = '';
-  @Output() provideSearchText: EventEmitter<string> = new EventEmitter<string>();
+  @Input() searchTextStream: Subject<string> = new Subject<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
-
   changeSearchText(): void {
-    this.provideSearchText.emit(this.inputValue);
+    this.searchTextStream.next(this.inputValue);
   }
 
 }

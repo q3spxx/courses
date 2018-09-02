@@ -17,9 +17,9 @@ export class AuthorisationService {
       login: login,
       password: password
     }).pipe(map((loginData: LoginData) => {
-      localStorage.setItem('token', loginData.token);
-      return true;
-    }));
+        localStorage.setItem('token', loginData.token);
+        return true;
+      }));
   }
   logout(): void {
     localStorage.removeItem('token');

@@ -1,6 +1,3 @@
 <div class="input-group">
-  <input [(ngModel)]="inputValue" type="text" class="form-control" placeholder="Text to search">
-  <span class="input-group-btn">
-    <button (click)="changeSearchText()" class="btn btn-secondary" type="button">Search</button>
-  </span>
+  <input [(ngModel)]="inputValue" (ngModelChange)="changeSearchText()" type="text" class="form-control" placeholder="Text to search">
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-toolbox',
@@ -7,15 +8,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ToolboxComponent implements OnInit {
 
-  @Output() provideSearchText: EventEmitter<string> = new EventEmitter<string>();
+  @Input() searchTextStream: Subject<string>;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  changeSearchText(text: string): void {
-    this.provideSearchText.emit(text);
   }
 
 }

@@ -1,9 +1,9 @@
 <app-core>
   <app-breadcrumbs></app-breadcrumbs>
   <app-toolbox
-    (provideSearchText)="changeSearchText($event)">
+    [searchTextStream]="searchTextStream">
   </app-toolbox>
   <app-course-list
-    [searchText]="searchText" >
+    [searchTextStream]="searchTextStream">
   </app-course-list>
 </app-core>

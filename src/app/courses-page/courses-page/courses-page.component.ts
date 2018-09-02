@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
@@ -7,15 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesPageComponent implements OnInit {
 
-  public searchText = '';
+  public searchTextStream = new Subject<string>();
 
   constructor() {
   }
 
   ngOnInit() {
-  }
-
-  changeSearchText(text: string) {
-    this.searchText = text;
   }
 }

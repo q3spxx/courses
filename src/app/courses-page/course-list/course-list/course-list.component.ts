@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CourseListItem } from '../../../interfaces/course-list-item';
 import { CoursesService } from '../../../services/courses/courses.service';
 import { Router } from '@angular/router';
+import { Subject, timer } from 'rxjs';
+import { filter, debounce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-list',
@@ -12,19 +14,9 @@ export class CourseListComponent implements OnInit {
   public courseListItems: CourseListItem[] = [];
   private page = 0;
   private count = 5;
-  private _searchText = '';
+  private searchText = '';
 
-
-  @Input()
-  set searchText (value: string) {
-    this._searchText = value;
-    this.page = 0;
-    this.count = 5;
-    this.getList();
-  }
-  get searchText () {
-    return this._searchText;
-  }
+  @Input() searchTextStream: Subject<string>;
 
   constructor(
     private coursesService: CoursesService,
@@ -32,6 +24,25 @@ export class CourseListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.searchTextStream
+      .pipe(
+        filter(value => {
+          if (value.length < 3 && this.searchText.length > value.length) {
+            return true;
+          } else if (value.length > 2) {
+            return true;
+          } else {
+            return false;
+          }
+        }),
+        debounce(() => timer(1000))
+      )
+      .subscribe((value) => {
+      this.searchText = value;
+      this.page = 0;
+      this.count = 5;
+      this.getList();
+    });
     this.getList();
   }
   getList() {

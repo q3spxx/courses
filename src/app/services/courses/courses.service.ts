@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CourseListItemData } from '../../interfaces/course-list-item-data';
 import CONFIG from '../../app.config';
 import { map } from 'rxjs/operators';
+import { LoadingService } from '../loading/loading.service';
 
 
 @Injectable({
@@ -12,11 +13,10 @@ import { map } from 'rxjs/operators';
 })
 export class CoursesService {
 
-  private courseListItems: CourseListItem[] = [];
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
   public getList(start: number, count: number, textFragment: string): Observable<CourseListItem[]> {
+    this.loadingService.setLoading(true);
     return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses?start=${start}&count=${count}&textFragment=${textFragment}`)
     .pipe(map((coursesData: CourseListItemData[]) => {
         const courses = coursesData.map((courseData: CourseListItemData) => {
@@ -29,6 +29,7 @@ export class CoursesService {
             courseData.isTopRated
           );
         });
+        this.loadingService.setLoading(false);
         return courses;
       })
     )
@@ -40,25 +41,34 @@ export class CoursesService {
     duration: number,
     topRate: boolean
   ): Observable<Object> {
+    this.loadingService.setLoading(true);
     return this.http.post(`${CONFIG.host}/courses`, new CourseListItemData(
       title,
       description,
       topRate,
       creationDate.toJSON(),
       duration
-    ));
+    )).pipe(
+      map((response: Observable<Object>) => {
+        this.loadingService.setLoading(false);
+        return response;
+      })
+    );
   }
   public getItemById(id: number): Observable<CourseListItem> {
-    return this.http.get(`${CONFIG.host}/courses/${id}`).pipe(map((data: CourseListItemData) => {
-      return new CourseListItem(
-        data.id,
-        data.name,
-        data.description,
-        new Date(data.date),
-        data.length,
-        data.isTopRated
-      );
-    }));
+    this.loadingService.setLoading(true);
+    return this.http.get(`${CONFIG.host}/courses/${id}`).pipe(
+      map((data: CourseListItemData) => {
+        this.loadingService.setLoading(false);
+        return new CourseListItem(
+          data.id,
+          data.name,
+          data.description,
+          new Date(data.date),
+          data.length,
+          data.isTopRated
+        )}
+      ));
   }
   public updateItem(
     id: number,
@@ -68,15 +78,27 @@ export class CoursesService {
     duration: number,
     topRate: boolean
   ): Observable<Object> {
+    this.loadingService.setLoading(true);
     return this.http.put(`${CONFIG.host}/courses/${id}`, new CourseListItemData(
       title,
       description,
       topRate,
       creationDate.toJSON(),
       duration
-    ));
+    )).pipe(
+      map((response: Observable<Object>) => {
+        this.loadingService.setLoading(false);
+        return response;
+      })
+    );
   }
   public removeItem(id: number): Observable<Object> {
-    return this.http.delete(`${CONFIG.host}/courses/${id}`);
+    this.loadingService.setLoading(true);
+    return this.http.delete(`${CONFIG.host}/courses/${id}`).pipe(
+      map((response: Observable<Object>) => {
+        this.loadingService.setLoading(false);
+        return response;
+      })
+    );
   }
 }
