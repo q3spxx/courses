@@ -2,8 +2,12 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { CourseListItem } from '../../../interfaces/course-list-item';
 import { CoursesService } from '../../../services/courses/courses.service';
 import { Router } from '@angular/router';
-import { Subject, timer } from 'rxjs';
+import { Subject, timer, Observable } from 'rxjs';
 import { filter, debounce } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../app-state';
+import { CoursesState } from '../../../reducers/courses-state';
+import { LoadCourses } from '../../../actions/courses.actions';
 
 @Component({
   selector: 'app-course-list',
@@ -11,7 +15,8 @@ import { filter, debounce } from 'rxjs/operators';
   styleUrls: ['./course-list.component.css']
 })
 export class CourseListComponent implements OnInit {
-  public courseListItems: CourseListItem[] = [];
+  public courseListItems: CourseListItem[];
+  // public courseListItems: Observable<CoursesState>;
   private page = 0;
   private count = 5;
   private searchText = '';
@@ -21,7 +26,13 @@ export class CourseListComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private router: Router,
-  ) { }
+    private store: Store<AppState>
+  ) {
+    // this.courseListItems = this.store.select('courses');
+     this.store.select('courses').subscribe((coursesState: CoursesState) => {
+      this.courseListItems = coursesState.courses;
+    }); 
+  }
 
   ngOnInit() {
     this.searchTextStream
@@ -46,10 +57,11 @@ export class CourseListComponent implements OnInit {
     this.getList();
   }
   getList() {
-    this.coursesService.getList(this.page * this.count, this.count, this.searchText)
-      .subscribe((courseListItems: CourseListItem[]) => {
-        this.courseListItems = courseListItems;
-    });
+    this.store.dispatch(new LoadCourses());
+    // this.coursesService.getList(this.page * this.count, this.count, this.searchText)
+    //   .subscribe((courseListItems: CourseListItem[]) => {
+    //     this.courseListItems = courseListItems;
+    // });
   }
   delete(id: number): void {
     if (confirm(`Do you really want to delete this course with id=${id}?`)) {
@@ -64,11 +76,11 @@ export class CourseListComponent implements OnInit {
     this.router.navigate(['courses', id]);
   }
   onClickLoadMore(): void {
-    if (this.courseListItems.length === 0) {
-      this.page = 0;
-    } else {
-      this.page++;
-    }
-    this.getList();
+    // if (this.courseListItems.length === 0) {
+    //   this.page = 0;
+    // } else {
+    //   this.page++;
+    // }
+    // this.getList();
   }
 }

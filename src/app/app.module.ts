@@ -11,6 +11,9 @@ import { AuthorisationService } from './services/authorisation/authorisation.ser
 import { AuthGuard } from './guards/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/authorisation/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+
+import { coursesReducer } from './reducers/courses.reducer';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { AuthInterceptor } from './services/authorisation/auth.interceptor';
   ],
   imports: [
     BrowserModule,
+    StoreModule.forRoot({
+      courses: coursesReducer
+    }),
     CoursesPageModule,
     LoginPageModule,
     AddCoursePageModule,
