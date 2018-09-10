@@ -13,7 +13,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/authorisation/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
 
-import { coursesReducer } from './reducers/courses.reducer';
+import { coursesReducer } from './courses-page/course-list/reducers/courses.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './courses-page/course-list/effects/courses-effects';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { coursesReducer } from './reducers/courses.reducer';
     StoreModule.forRoot({
       courses: coursesReducer
     }),
+    EffectsModule.forRoot([CoursesEffects]),
     CoursesPageModule,
     LoginPageModule,
     AddCoursePageModule,

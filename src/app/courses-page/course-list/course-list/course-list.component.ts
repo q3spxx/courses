@@ -6,8 +6,8 @@ import { Subject, timer, Observable } from 'rxjs';
 import { filter, debounce } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state';
-import { CoursesState } from '../../../reducers/courses-state';
-import { LoadCourses } from '../../../actions/courses.actions';
+import { CoursesState } from '../reducers/courses-state';
+import { LoadCourses } from '../actions/courses.actions';
 
 @Component({
   selector: 'app-course-list',
@@ -57,7 +57,11 @@ export class CourseListComponent implements OnInit {
     this.getList();
   }
   getList() {
-    this.store.dispatch(new LoadCourses());
+    this.store.dispatch(new LoadCourses({
+      start: this.page,
+      count: this.count,
+      textFragment: this.searchText
+    }));
     // this.coursesService.getList(this.page * this.count, this.count, this.searchText)
     //   .subscribe((courseListItems: CourseListItem[]) => {
     //     this.courseListItems = courseListItems;

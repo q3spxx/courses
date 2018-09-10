@@ -1,5 +1,5 @@
 import { CoursesState } from "./courses-state";
-import { Actions } from "../actions/courses.actions";
+import { Actions, CoursesActionType } from "../actions/courses.actions";
 
 const initialState = {
     courses: []
@@ -7,8 +7,11 @@ const initialState = {
 
 export function coursesReducer(state: CoursesState = initialState, action: Actions): CoursesState {
     switch(action.type) {
-        case 'FETCH_COURSES':
-            return Object.assign(state, { courses: action.payload });
+        case CoursesActionType.fetchCourses:
+            return {
+                ...state,
+                courses: action.payload
+            };
         default:
             return state;
     }

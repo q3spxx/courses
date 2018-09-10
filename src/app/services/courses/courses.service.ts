@@ -6,6 +6,7 @@ import { CourseListItemData } from '../../interfaces/course-list-item-data';
 import CONFIG from '../../app.config';
 import { map } from 'rxjs/operators';
 import { LoadingService } from '../loading/loading.service';
+import { CoursesParams } from '../../interfaces/courses-params';
 
 
 @Injectable({
@@ -15,9 +16,9 @@ export class CoursesService {
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
-  public getList(start: number, count: number, textFragment: string): Observable<CourseListItem[]> {
+  public getList(params: CoursesParams): Observable<CourseListItem[]> {
     this.loadingService.setLoading(true);
-    return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses?start=${start}&count=${count}&textFragment=${textFragment}`)
+    return this.http.get<CourseListItemData[]>(`${CONFIG.host}/courses`, { params: params as any })
     .pipe(map((coursesData: CourseListItemData[]) => {
         const courses = coursesData.map((courseData: CourseListItemData) => {
           return new CourseListItem(
